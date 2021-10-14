@@ -2,10 +2,81 @@ package com.paasta.hiclass
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import com.paasta.hiclass.model.UserData
+import com.paasta.hiclass.databinding.ActivityLoginBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
+
+    private  var mBinding:ActivityLoginBinding?=null
+    private  val binding get()=mBinding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+
+
+        init()
     }
+    private fun init(){
+        mBinding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        addEventListener()
+
+    }
+
+    private fun addEventListener() {
+        binding.btnLogin.setOnClickListener {
+            login()
+        }
+    }
+
+    //로그인
+    private fun login() {
+        if (binding.editEmail?.text.toString()!="" && binding.editEmail?.text.toString()!="") {
+//            val progressDialog: ProgressDialog = ProgressDialog(this)
+//            progressDialog.setTitle("로그인중...")
+//            progressDialog.show()
+            RetrofitClient.retrofitservice.requestLogin(
+                binding.editEmail.text.toString(),
+                binding.editPassword.text.toString()
+            ).enqueue(object : Callback<UserData> {
+                override fun onFailure(call: Call<UserData>, t: Throwable) {
+                    Toast.makeText(applicationContext,"통신 실패",Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
+                    //로그인 성공시 홈으로 이동
+                    val body = response.body()
+                    if(response.body()?.name!="Fail") {
+                        if(response.body()?.name=="no"){
+                            Toast.makeText(applicationContext, "해당 이메일은 가입되어 있지 않습니다.", Toast.LENGTH_SHORT).show()
+//                            progressDialog.cancel()
+                        }else {
+                            val loginDB = LoginDB(context = applicationContext)
+                            loginDB.insertDB(
+                                body!!.email,
+                                body!!.password,
+                                body!!.name,
+                                body!!.image
+                            )
+                            Toast.makeText(applicationContext, "홈 화면으로 이동합니다", Toast.LENGTH_LONG)
+                                .show()
+//                            startActivity(Intent(applicationContext, Home::class.java))
+                        }
+                    }else {
+                        Toast.makeText(applicationContext, "이메일 및 패스워드가 일치하지 않습니다", Toast.LENGTH_SHORT).show()
+//                        progressDialog.cancel()
+                    }
+                }
+            })
+        } else {
+            Toast.makeText(this, "이메일과 패스워드를 모두 기입해주세요", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
 }

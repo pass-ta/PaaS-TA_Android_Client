@@ -1,5 +1,6 @@
 package com.paasta.hiclass
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -8,11 +9,15 @@ import com.paasta.hiclass.databinding.ActivityLoginBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.widget.RadioButton
+import android.widget.RadioGroup
 
 class LoginActivity : AppCompatActivity() {
 
     private  var mBinding:ActivityLoginBinding?=null
     private  val binding get()=mBinding!!
+    private var role:String="teacher"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,19 +35,30 @@ class LoginActivity : AppCompatActivity() {
 
     private fun addEventListener() {
         binding.btnLogin.setOnClickListener {
+
+            binding.radiobtnLogin.setOnCheckedChangeListener { radioGroup, i ->
+                when(i){
+                    R.id.radiobtn_teacher -> role="teacher"
+                    R.id.radiobtn_student -> role="student"
+                }
+            }
             login()
+        }
+        binding.txtSignup.setOnClickListener {
+            startActivity(Intent(applicationContext, SignUpActivity::class.java))
         }
     }
 
     //로그인
     private fun login() {
+
         if (binding.editEmail?.text.toString()!="" && binding.editEmail?.text.toString()!="") {
 //            val progressDialog: ProgressDialog = ProgressDialog(this)
 //            progressDialog.setTitle("로그인중...")
 //            progressDialog.show()
             RetrofitClient.retrofitservice.requestLogin(
                 binding.editEmail.text.toString(),
-                binding.editPassword.text.toString()
+                binding.editPassword.text.toString(),role
             ).enqueue(object : Callback<UserData> {
                 override fun onFailure(call: Call<UserData>, t: Throwable) {
                     Toast.makeText(applicationContext,"통신 실패",Toast.LENGTH_SHORT).show()
@@ -65,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
                             )
                             Toast.makeText(applicationContext, "홈 화면으로 이동합니다", Toast.LENGTH_LONG)
                                 .show()
-//                            startActivity(Intent(applicationContext, Home::class.java))
+                            startActivity(Intent(applicationContext, MainActivity::class.java))
                         }
                     }else {
                         Toast.makeText(applicationContext, "이메일 및 패스워드가 일치하지 않습니다", Toast.LENGTH_SHORT).show()

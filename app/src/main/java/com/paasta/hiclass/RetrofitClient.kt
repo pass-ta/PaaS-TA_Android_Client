@@ -29,7 +29,7 @@ object RetrofitClient {
     val retrofit = Retrofit.Builder()
         //url 은 ngrok 사용으로 계속 달라짐.
 //        .client(okHttpClient)
-        .baseUrl("https://118.67.131.138:30000")
+        .baseUrl("https://6b29-1-242-40-90.ngrok.io")
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(getUnsafeOkHttpClient().build())
         .build()
@@ -72,14 +72,7 @@ object RetrofitClient {
 //서버로 보내는 INPUT데이터
 interface RetrofitService {
     //베이스 URL 을 제외한 경로
-//    @FormUrlEncoded
-//    @POST("/app_signup")
-//    fun requestSignUp(
-//        @Field("email") email: String,
-//        @Field("password") password: String,
-//        @Field("name") name: String
-//    ): Call<DataSignUp>
-//    //@Headers("Content-Type: application/json")
+
 //    @Multipart
 //    @POST("/app_image")
 //    fun requestImage(
@@ -95,8 +88,18 @@ interface RetrofitService {
     @POST("/app_login")
     fun requestLogin(
         @Field("email") email: String,
-        @Field("password") password: String
+        @Field("password") password: String,
+        @Field("role") role: String,
     ): Call<UserData>
+    @FormUrlEncoded
+    @POST("/app_signup")
+    fun requestSignUp(
+        @Field("email") email: String,
+        @Field("password") password: String,
+        @Field("name") name: String,
+        @Field("role") role: String,
+    ): Call<UserData>
+    //@Headers("Content-Type: application/json")
 //    @FormUrlEncoded
 //    @POST("/app_delete")
 //    fun requestDelete(

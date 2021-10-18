@@ -25,14 +25,16 @@
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:id="@+id/radiobtn_login">
+            android:id="@+id/radiobtn_signup">
             <RadioButton
+                android:id="@+id/radiobtn_teacher"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:buttonTint="@color/orange"
                 android:text="교사"/>
             <RadioButton
+                android:id="@+id/radiobtn_student"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/orange"

@@ -2,6 +2,7 @@ package com.paasta.hiclass
 
 import com.google.gson.GsonBuilder
 import com.paasta.hiclass.model.UserData
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -29,7 +30,7 @@ object RetrofitClient {
     val retrofit = Retrofit.Builder()
         //url 은 ngrok 사용으로 계속 달라짐.
 //        .client(okHttpClient)
-        .baseUrl("https://0462-1-242-40-90.ngrok.io")
+        .baseUrl("https://a1c3-1-242-40-90.ngrok.io")
         .addConverterFactory(GsonConverterFactory.create(gson))
 //        .client(getUnsafeOkHttpClient().build())
         .build()
@@ -73,11 +74,7 @@ object RetrofitClient {
 interface RetrofitService {
     //베이스 URL 을 제외한 경로
 
-//    @Multipart
-//    @POST("/app_image")
-//    fun requestImage(
-//        @Part image: MultipartBody.Part
-//    ): Call<DataImage2>
+
 //    //    @Headers("Content-Type: application/json")
 //    @Multipart
 //    @POST("main/app_images")
@@ -99,6 +96,17 @@ interface RetrofitService {
         @Field("name") name: String,
         @Field("role") role: String,
     ): Call<UserData>
+
+    @Multipart
+    @POST("/app_profileimg")
+    fun requestAddProfileImage(
+        @Part image: MultipartBody.Part
+    ): Call<String>
+    @FormUrlEncoded
+    @POST("/app_getprofileimg")
+    fun requestProfileImage(
+        @Field("email") email: String,
+    ): Call<String>
     //@Headers("Content-Type: application/json")
 //    @FormUrlEncoded
 //    @POST("/app_delete")

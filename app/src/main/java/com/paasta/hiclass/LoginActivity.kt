@@ -12,6 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import com.paasta.hiclass.model.PreferenceUtil
 
 class LoginActivity : AppCompatActivity() {
 
@@ -20,7 +21,10 @@ class LoginActivity : AppCompatActivity() {
     private var role:String="teacher"
 
 
+    companion object { lateinit var prefs: PreferenceUtil }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        prefs = PreferenceUtil(applicationContext)
         super.onCreate(savedInstanceState)
 
 
@@ -76,13 +80,9 @@ class LoginActivity : AppCompatActivity() {
                             Toast.makeText(applicationContext, "해당 이메일은 가입되어 있지 않습니다.", Toast.LENGTH_SHORT).show()
 //                            progressDialog.cancel()
                         }else {
-                            val loginDB = LoginDB(context = applicationContext)
-                            loginDB.insertDB(
-                                body!!.email,
-                                body!!.password,
-                                body!!.name,
-                                body!!.image
-                            )
+                            prefs.setString("email",binding.editEmail.text.toString())
+                            prefs.setString("password",binding.editPassword.text.toString())
+                            prefs.setString("role",role)
                             Toast.makeText(applicationContext, "홈 화면으로 이동합니다", Toast.LENGTH_LONG)
                                 .show()
                             startActivity(Intent(applicationContext, MainActivity::class.java))

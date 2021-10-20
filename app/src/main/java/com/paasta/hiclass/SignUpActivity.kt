@@ -19,9 +19,6 @@ class SignUpActivity : AppCompatActivity() {
     private  var mBinding:ActivitySignUpBinding?=null
     private  val binding get()=mBinding!!
     private var role:String=""
-    private var name:String = ""
-    private var email:String = ""
-    private var password:String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,8 +86,9 @@ class SignUpActivity : AppCompatActivity() {
                 val body = response.body()
                 Log.d("통신응답", response.body()?.name.toString())
                 if(response.body()?.name!="Fail") {
-//                    val loginDB = LoginDB(context = applicationContext)
-//                    loginDB.insertDB(body!!.email,body!!.password,body!!.name,body!!.image)
+                    LoginActivity.prefs.setString("email",binding.editEmail.text.toString())
+                    LoginActivity.prefs.setString("password",binding.editPassword.text.toString())
+                    LoginActivity.prefs.setString("role",role)
                     Toast.makeText(applicationContext, "홈 화면으로 이동합니다", Toast.LENGTH_LONG).show()
                     startActivity(Intent(applicationContext, MainActivity::class.java))
 //                    progressDialog.cancel()

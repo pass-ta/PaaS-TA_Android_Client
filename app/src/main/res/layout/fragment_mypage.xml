@@ -72,15 +72,19 @@
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="dfdfdfd"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_1"
-            android:text="qjxmsjxj"/>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="dfdfdfd"/>-->
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/btn_1"-->
+<!--            android:text="qjxmsjxj"/>-->
+<!--        <ImageView-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="200dp"-->
+<!--            android:id="@+id/img_profile"/>-->
     </LinearLayout>
 
 

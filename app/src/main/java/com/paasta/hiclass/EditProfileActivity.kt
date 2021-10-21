@@ -1,24 +1,19 @@
-package com.paasta.hiclass.fragment
+package com.paasta.hiclass
 
 import android.content.ContentResolver
 import android.content.Intent
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.telephony.PhoneNumberFormattingTextWatcher
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import com.paasta.hiclass.*
+import com.paasta.hiclass.databinding.ActivityEditProfileBinding
+import com.paasta.hiclass.databinding.ActivityLoginBinding
 import com.paasta.hiclass.databinding.FragmentMypageBinding
-import com.paasta.hiclass.model.ImageLoadTask
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -27,72 +22,56 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
+class EditProfileActivity : AppCompatActivity() {
 
-class MypageFragment : Fragment() {
-
+    private  var mBinding: ActivityEditProfileBinding?=null
+    private  val binding get()=mBinding!!
 
     val Gallery =1
-
-    private  var mBinding: FragmentMypageBinding?=null
-    private  val binding get()=mBinding!!
 
     private var imgUri: Uri? = null
     lateinit var bodyFile: RequestBody
     lateinit var body: MultipartBody.Part
-    var contentResolver: ContentResolver? = null
 
-    private var name : String =""
-    private var email : String =""
+    private var email =""
+    private var role =""
+    private var oldName =""
+    private var oldPassword =""
+    private var newName =""
+    private var newPassword =""
 
-//    private lateinit var addImageBtn: ImageView
-    private lateinit var newImage: ImageView
-    private lateinit var userName: TextView
-    private lateinit var userEmail: TextView
-    private lateinit var editProfile: TextView
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_mypage,container, false)
-
-
-        return view
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_edit_profile)
+        init()
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-//        addImageBtn = view.findViewById(R.id.btn_add_image)
-        newImage = view.findViewById(R.id.img_profile)
-        userName = view.findViewById(R.id.txt_username)
-        userEmail = view.findViewById(R.id.txt_useremail)
-        editProfile = view.findViewById(R.id.btn_edit_profile)
+    private fun init(){
+        mBinding = ActivityEditProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        name = LoginActivity.prefs.getString("name","")
-        email = LoginActivity.prefs.getString("email","")
+        oldName=LoginActivity.prefs.getString("name","")
+        oldPassword=LoginActivity.prefs.getString("password","")
+        role =LoginActivity.prefs.getString("role","")
+        email =LoginActivity.prefs.getString("email","")
 
-        userName.setText(String.format("%s 님", name))
-        userEmail.setText(email)
-
+        binding.editName.setHint(oldName)
         addEventListener()
-        getProfileImg()
-    }
-
-    private fun addEventListener() {
-
-//        addImageBtn.setOnClickListener{loadImage()}
-
-        editProfile.setOnClickListener{
-            startActivity(Intent(getActivity()?.getApplicationContext(), EditProfileActivity::class.java))
-        }
 
     }
+    private fun addEventListener(){
+
+        binding.btnAddImage.setOnClickListener{loadImage()}
+        binding.editNumber.addTextChangedListener(PhoneNumberFormattingTextWatcher())
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == Gallery){
             imgUri = data?.data
-            contentResolver = getActivity()?.getContentResolver()
             try{
                 var bitmap : Bitmap = MediaStore.Images.Media.getBitmap(contentResolver,imgUri)
-                newImage.setImageBitmap(bitmap)
-                addProfileImg()
+                binding.imgProfile.setImageBitmap(bitmap)
+//                addProfileImg()
             }catch (e:Exception){
 
             }
@@ -117,10 +96,11 @@ class MypageFragment : Fragment() {
         Log.d("방 사진2", bodyFile.toString())
         body = MultipartBody.Part.createFormData("image", email, bodyFile)
 
-        RetrofitClient.retrofitservice.requestAddProfileImage(body).enqueue(object : Callback<String> {
+        RetrofitClient.retrofitservice.requestAddProfileImage(body).enqueue(object :
+            Callback<String> {
             override fun onFailure(call: Call<String>, t: Throwable) {
                 Toast.makeText(
-                    getActivity(),
+                    applicationContext,
                     "통신 실패",
                     Toast.LENGTH_LONG
                 ).show()
@@ -129,7 +109,7 @@ class MypageFragment : Fragment() {
 
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 Toast.makeText(
-                    getActivity(),
+                    applicationContext,
                     "변경 완료",
                     Toast.LENGTH_LONG
                 ).show()
@@ -138,12 +118,6 @@ class MypageFragment : Fragment() {
 
             }
         })
-    }
-
-    private fun getProfileImg(){
-        val url = "https://75c7-1-242-40-90.ngrok.io/media/profile/aaanaver.com.jpg"
-        val task = ImageLoadTask(url, newImage)
-        task.execute()
     }
 
     //이미지 절대경로 구하기
@@ -186,23 +160,3 @@ class MypageFragment : Fragment() {
     }
 
 }
-//object ImageLoader{
-//
-//    fun loadImage(imageUrl: String): Bitmap? {
-//        val bmp: Bitmap? = null
-//        try {
-//
-//            val url = URL(imageUrl)
-//            val stream = url.openStream()
-//
-//            return BitmapFactory.decodeStream(stream)
-//
-//        } catch (e: MalformedURLException) {
-//            e.printStackTrace()
-//        } catch (e: IOException) {
-//            e.printStackTrace()
-//        }
-//        return bmp
-//    }
-//
-//}

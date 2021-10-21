@@ -83,6 +83,8 @@ class LoginActivity : AppCompatActivity() {
                             prefs.setString("email",binding.editEmail.text.toString())
                             prefs.setString("password",binding.editPassword.text.toString())
                             prefs.setString("role",role)
+                            prefs.setString("name", body?.name.toString())
+
                             Toast.makeText(applicationContext, "홈 화면으로 이동합니다", Toast.LENGTH_LONG)
                                 .show()
                             startActivity(Intent(applicationContext, MainActivity::class.java))

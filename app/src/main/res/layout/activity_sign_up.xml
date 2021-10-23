@@ -25,14 +25,16 @@
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:id="@+id/radiobtn_login">
+            android:id="@+id/radiobtn_signup">
             <RadioButton
+                android:id="@+id/radiobtn_teacher"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:buttonTint="@color/orange"
                 android:text="교사"/>
             <RadioButton
+                android:id="@+id/radiobtn_student"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/orange"
@@ -45,7 +47,7 @@
             android:layout_height="40dp"
             android:orientation="horizontal"
             android:layout_marginTop="13dp"
-            android:background="@drawable/edittext_layout"
+            android:background="@drawable/edittext_layout1"
             android:paddingHorizontal="12dp">
 
             <ImageView
@@ -70,7 +72,7 @@
             android:layout_height="40dp"
             android:orientation="horizontal"
             android:layout_marginTop="15dp"
-            android:background="@drawable/edittext_layout"
+            android:background="@drawable/edittext_layout1"
             android:paddingHorizontal="12dp">
 
             <ImageView
@@ -94,7 +96,7 @@
             android:layout_height="40dp"
             android:orientation="horizontal"
             android:layout_marginTop="15dp"
-            android:background="@drawable/edittext_layout"
+            android:background="@drawable/edittext_layout1"
             android:paddingHorizontal="12dp">
 
             <ImageView

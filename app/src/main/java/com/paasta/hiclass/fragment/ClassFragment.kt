@@ -1,4 +1,4 @@
-package com.paasta.hiclass.model.fragment
+package com.paasta.hiclass.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

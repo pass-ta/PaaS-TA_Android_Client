@@ -3,9 +3,9 @@ package com.paasta.hiclass
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.paasta.hiclass.model.fragment.ClassFragment
-import com.paasta.hiclass.model.fragment.HomeFragment
-import com.paasta.hiclass.model.fragment.MypageFragment
+import com.paasta.hiclass.fragment.ClassFragment
+import com.paasta.hiclass.fragment.HomeFragment
+import com.paasta.hiclass.fragment.MypageFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

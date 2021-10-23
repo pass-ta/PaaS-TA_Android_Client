@@ -2,6 +2,7 @@ package com.paasta.hiclass
 
 import com.google.gson.GsonBuilder
 import com.paasta.hiclass.model.UserData
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -29,42 +30,42 @@ object RetrofitClient {
     val retrofit = Retrofit.Builder()
         //url 은 ngrok 사용으로 계속 달라짐.
 //        .client(okHttpClient)
-        .baseUrl("https://6b29-1-242-40-90.ngrok.io")
+        .baseUrl("https://75c7-1-242-40-90.ngrok.io")
         .addConverterFactory(GsonConverterFactory.create(gson))
-        .client(getUnsafeOkHttpClient().build())
+//        .client(getUnsafeOkHttpClient().build())
         .build()
 
-    fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
-        val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
-            override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-
-            }
-
-            override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-
-            }
-
-            override fun getAcceptedIssuers(): Array<X509Certificate> {
-                return arrayOf()
-            }
-        })
-
-        val sslContext = SSLContext.getInstance("SSL")
-        sslContext.init(null, trustAllCerts, SecureRandom())
-
-        val sslSocketFactory = sslContext.socketFactory
-
-        val builder = OkHttpClient.Builder()
-        builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
-        builder.hostnameVerifier { hostname, session -> true }
-            .connectTimeout(40, TimeUnit.SECONDS)
-            .readTimeout(60, TimeUnit.SECONDS)
-            .writeTimeout(60, TimeUnit.SECONDS)
-            .build()
-
-
-        return builder
-    }
+//    fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
+//        val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
+//            override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
+//
+//            }
+//
+//            override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
+//
+//            }
+//
+//            override fun getAcceptedIssuers(): Array<X509Certificate> {
+//                return arrayOf()
+//            }
+//        })
+//
+//        val sslContext = SSLContext.getInstance("SSL")
+//        sslContext.init(null, trustAllCerts, SecureRandom())
+//
+//        val sslSocketFactory = sslContext.socketFactory
+//
+//        val builder = OkHttpClient.Builder()
+//        builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
+//        builder.hostnameVerifier { hostname, session -> true }
+//            .connectTimeout(40, TimeUnit.SECONDS)
+//            .readTimeout(60, TimeUnit.SECONDS)
+//            .writeTimeout(60, TimeUnit.SECONDS)
+//            .build()
+//
+//
+//        return builder
+//    }
 
     val retrofitservice: RetrofitService = retrofit.create(RetrofitService::class.java)
 }
@@ -73,11 +74,7 @@ object RetrofitClient {
 interface RetrofitService {
     //베이스 URL 을 제외한 경로
 
-//    @Multipart
-//    @POST("/app_image")
-//    fun requestImage(
-//        @Part image: MultipartBody.Part
-//    ): Call<DataImage2>
+
 //    //    @Headers("Content-Type: application/json")
 //    @Multipart
 //    @POST("main/app_images")
@@ -99,6 +96,17 @@ interface RetrofitService {
         @Field("name") name: String,
         @Field("role") role: String,
     ): Call<UserData>
+
+    @Multipart
+    @POST("/app_profileimg")
+    fun requestAddProfileImage(
+        @Part image: MultipartBody.Part
+    ): Call<String>
+    @FormUrlEncoded
+    @POST("/app_getprofileimg")
+    fun requestProfileImage(
+        @Field("email") email: String,
+    ): Call<String>
     //@Headers("Content-Type: application/json")
 //    @FormUrlEncoded
 //    @POST("/app_delete")

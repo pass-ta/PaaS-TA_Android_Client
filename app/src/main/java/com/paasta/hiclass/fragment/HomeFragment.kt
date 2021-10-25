@@ -1,22 +1,28 @@
 package com.paasta.hiclass.fragment
 
+import android.app.Application
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentContainer
+import androidx.fragment.app.FragmentTransaction
+import com.paasta.hiclass.CustomDialog
 import com.paasta.hiclass.LoginActivity
 import com.paasta.hiclass.R
-import com.paasta.hiclass.model.PreferenceUtil
+
 
 class HomeFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        Log.d("이메일",LoginActivity.prefs.getString("email",""))
-        Log.d("비번",LoginActivity.prefs.getString("password",""))
-    }
+    private var name : String =""
+    private var email : String =""
+
+    private lateinit var enterClass: ImageView
+    private lateinit var manageQuiz: ImageView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -24,4 +30,25 @@ class HomeFragment : Fragment() {
         // 처리
         return view
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        enterClass = view.findViewById(R.id.btn_enter_class)
+        manageQuiz = view.findViewById(R.id.btn_manage_quiz)
+
+        name = LoginActivity.prefs.getString("name","")
+        email = LoginActivity.prefs.getString("email","")
+
+
+        addEventListener()
+
+    }
+
+    private fun addEventListener() {
+        enterClass.setOnClickListener{
+            val customDialog = CustomDialog()
+            getActivity()?.getSupportFragmentManager()?.let { it1 -> customDialog.show(it1,"tag") }
+        }
+    }
+
 }

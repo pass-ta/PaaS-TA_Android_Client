@@ -61,7 +61,7 @@ class EditProfileActivity : AppCompatActivity() {
     private fun addEventListener(){
 
         binding.btnAddImage.setOnClickListener{loadImage()}
-        binding.editNumber.addTextChangedListener(PhoneNumberFormattingTextWatcher())
+//        binding.editNumber.addTextChangedListener(PhoneNumberFormattingTextWatcher())
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

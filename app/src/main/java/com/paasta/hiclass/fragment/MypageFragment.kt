@@ -11,7 +11,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -49,6 +48,7 @@ class MypageFragment : Fragment() {
     private lateinit var userName: TextView
     private lateinit var userEmail: TextView
     private lateinit var editProfile: TextView
+    private lateinit var logoutBtn: TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -64,6 +64,7 @@ class MypageFragment : Fragment() {
         userName = view.findViewById(R.id.txt_username)
         userEmail = view.findViewById(R.id.txt_useremail)
         editProfile = view.findViewById(R.id.btn_edit_profile)
+        logoutBtn = view.findViewById(R.id.btn_logout)
 
         name = LoginActivity.prefs.getString("name","")
         email = LoginActivity.prefs.getString("email","")
@@ -81,6 +82,10 @@ class MypageFragment : Fragment() {
 
         editProfile.setOnClickListener{
             startActivity(Intent(getActivity()?.getApplicationContext(), EditProfileActivity::class.java))
+        }
+        logoutBtn.setOnClickListener {
+            val logoutDialog = LogoutDialog()
+            getActivity()?.getSupportFragmentManager()?.let { it1 -> logoutDialog.show(it1,"logout") }
         }
 
     }
@@ -141,7 +146,7 @@ class MypageFragment : Fragment() {
     }
 
     private fun getProfileImg(){
-        val url = "https://75c7-1-242-40-90.ngrok.io/media/profile/aaanaver.com.jpg"
+        val url = "https://31b4-1-242-40-90.ngrok.io/media/profile/aaanaver.com.jpg"
         val task = ImageLoadTask(url, newImage)
         task.execute()
     }

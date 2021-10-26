@@ -88,6 +88,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/btn_enter_class"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
                     android:layout_marginLeft="65dp"
@@ -95,6 +96,7 @@
                     android:src="@drawable/enterclass" />
 
                 <ImageView
+                    android:id="@+id/btn_manage_quiz"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
                     android:layout_marginLeft="20dp"

@@ -58,8 +58,7 @@ class RoomCamera : AppCompatActivity() {
         //카메라 권한의 승인 상태 가져오기
         val cameraPermission = ContextCompat.checkSelfPermission(this,android.Manifest.permission.CAMERA)
 
-
-        while(cameraPermission != PackageManager.PERMISSION_GRANTED){
+        if(cameraPermission != PackageManager.PERMISSION_GRANTED){
             //승인되지 않았다면 권한 요청 프로세스 진행
             requestPermission()
         }
@@ -71,22 +70,10 @@ class RoomCamera : AppCompatActivity() {
     }
 
     private fun requestPermission() {
-        val cameraPermissionCheck = ContextCompat.checkSelfPermission( this@RoomCamera,
-            android.Manifest.permission.CAMERA
-        )
-        if (cameraPermissionCheck != PackageManager.PERMISSION_GRANTED) { // 권한이 없는 경우
-            ActivityCompat.requestPermissions(
+        ActivityCompat.requestPermissions(
                 this, arrayOf(android.Manifest.permission.CAMERA),
                 1000
-            )
-        } else { //권한이 있는 경우
-            val REQUEST_IMAGE_CAPTURE = 1
-//            Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-//                takePictureIntent.resolveActivity(packageManager)?.also {
-//                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-//                }
-//            }
-        }
+        )
 
     }
 
@@ -99,9 +86,8 @@ class RoomCamera : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 1000) {
             if (grantResults[0] != PackageManager.PERMISSION_GRANTED) { //거부
-                Toast.makeText(this@RoomCamera, "거부당했쪙ㅠㅠ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@RoomCamera, "카메라 권한을 허용해주세요.", Toast.LENGTH_SHORT).show()
                 finish()
-                return
             } } }
 
             }

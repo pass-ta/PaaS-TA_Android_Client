@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
                     val classFragment = ClassFragment()
                     supportFragmentManager.beginTransaction().replace(R.id.fl_container, classFragment).commit()
                 }
-                R.id.third -> {
+                R.id.fifth -> {
                     val mypageFragment = MypageFragment()
                     supportFragmentManager.beginTransaction().replace(R.id.fl_container, mypageFragment).commit()
                 }

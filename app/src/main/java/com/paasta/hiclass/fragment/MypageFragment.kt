@@ -146,7 +146,7 @@ class MypageFragment : Fragment() {
     }
 
     private fun getProfileImg(){
-        val url = "https://31b4-1-242-40-90.ngrok.io/media/profile/aaanaver.com.jpg"
+        val url = "https://6a34-1-242-40-90.ngrok.io/media/profile/aaanaver.com.jpg"
         val task = ImageLoadTask(url, newImage)
         task.execute()
     }

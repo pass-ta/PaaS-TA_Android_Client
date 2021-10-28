@@ -30,7 +30,7 @@ object RetrofitClient {
     val retrofit = Retrofit.Builder()
         //url 은 ngrok 사용으로 계속 달라짐.
 //        .client(okHttpClient)
-        .baseUrl("https://6a34-1-242-40-90.ngrok.io")
+        .baseUrl("https://19eb-1-242-40-90.ngrok.io")
         .addConverterFactory(GsonConverterFactory.create(gson))
 //        .client(getUnsafeOkHttpClient().build())
         .build()
@@ -75,12 +75,8 @@ interface RetrofitService {
     //베이스 URL 을 제외한 경로
 
 
-//    //    @Headers("Content-Type: application/json")
-//    @Multipart
-//    @POST("main/app_images")
-//    fun myrequestImage2(
-//        @Part image: MultipartBody.Part
-//    ): Call<DataImage2>
+    //    @Headers("Content-Type: application/json")
+
     @FormUrlEncoded
     @POST("/app_login")
     fun requestLogin(
@@ -106,6 +102,12 @@ interface RetrofitService {
     @POST("/app_getprofileimg")
     fun requestProfileImage(
         @Field("email") email: String,
+    ): Call<String>
+
+    @Multipart
+    @POST("class/app_checkimg")
+    fun requestCheckImage(
+        @Part image: MultipartBody.Part
     ): Call<String>
     //@Headers("Content-Type: application/json")
 //    @FormUrlEncoded

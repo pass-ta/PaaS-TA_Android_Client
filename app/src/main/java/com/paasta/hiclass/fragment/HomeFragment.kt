@@ -49,11 +49,11 @@ class HomeFragment : Fragment() {
 
     private fun addEventListener() {
         enterClass.setOnClickListener{
-//            val customDialog = CustomDialog()
-//            getActivity()?.getSupportFragmentManager()?.let { it1 -> customDialog.show(it1,"tag") }
+            val customDialog = CustomDialog()
+            getActivity()?.getSupportFragmentManager()?.let { it1 -> customDialog.show(it1,"tag") }
 
-            val intent = Intent(getActivity(), RoomCamera::class.java)
-            startActivity(intent)
+//            val intent = Intent(getActivity(), RoomCamera::class.java)
+//            startActivity(intent)
         }
     }
 

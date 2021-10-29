@@ -44,7 +44,7 @@ class RoomCamera : AppCompatActivity() {
     var sv_viewFinder: SurfaceView? = null
     var sh_viewFinder: SurfaceHolder? = null
     var camera: Camera? = null
-//    var myfile: File? = null
+    var myfile: File? = null
 //    var btn_shutter: Button? = null
 //    var btn_again: Button? = null
 //    var room_sendlottie: Button? = null

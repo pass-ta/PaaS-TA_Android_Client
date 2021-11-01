@@ -86,7 +86,8 @@ class RoomCamera : AppCompatActivity() {
 //        index = intent.getStringExtra("index")
 //        roomname = intent.getStringExtra("roomname")
 
-        roomname="studying"
+        roomname=intent.getStringExtra("classname")
+        Log.d("수업이름", roomname.toString())
         index="123"
 
 

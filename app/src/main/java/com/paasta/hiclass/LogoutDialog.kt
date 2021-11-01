@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import com.paasta.hiclass.databinding.CustomDialogBinding
 import com.paasta.hiclass.databinding.DialogLogoutBinding
 
 

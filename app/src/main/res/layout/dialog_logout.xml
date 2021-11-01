@@ -31,7 +31,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:background="@drawable/button_layout"
+            android:background="@drawable/button_layout_orange"
             android:text="취소" />
 
         <Button
@@ -39,7 +39,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:background="@drawable/button_layout"
+            android:background="@drawable/button_layout_orange"
             android:text="로그아웃" />
 
     </LinearLayout>

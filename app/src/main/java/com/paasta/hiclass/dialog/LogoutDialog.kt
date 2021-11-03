@@ -1,4 +1,4 @@
-package com.paasta.hiclass
+package com.paasta.hiclass.dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Point

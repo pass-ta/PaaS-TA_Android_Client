@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.paasta.hiclass.*
+import com.paasta.hiclass.dialog.AttendanceDialog
 import retrofit2.Call
 import retrofit2.Response
 

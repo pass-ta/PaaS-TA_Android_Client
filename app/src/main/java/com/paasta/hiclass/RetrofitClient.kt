@@ -30,7 +30,7 @@ object RetrofitClient {
     val retrofit = Retrofit.Builder()
         //url 은 ngrok 사용으로 계속 달라짐.
 //        .client(okHttpClient)
-        .baseUrl("https://19eb-1-242-40-90.ngrok.io")
+        .baseUrl("https://fddf-1-242-40-90.ngrok.io")
         .addConverterFactory(GsonConverterFactory.create(gson))
 //        .client(getUnsafeOkHttpClient().build())
         .build()
@@ -76,7 +76,6 @@ interface RetrofitService {
 
 
     //    @Headers("Content-Type: application/json")
-
     @FormUrlEncoded
     @POST("/app_login")
     fun requestLogin(
@@ -92,7 +91,6 @@ interface RetrofitService {
         @Field("name") name: String,
         @Field("role") role: String,
     ): Call<UserData>
-
     @Multipart
     @POST("/app_profileimg")
     fun requestAddProfileImage(
@@ -145,12 +143,12 @@ interface RetrofitService {
 //    fun requestmyroom(
 //        @Field("email") email: String
 //    ):Call<List<DataMyRoomInfo>>
-//    @FormUrlEncoded
-//    @POST("main/app_enter_room")
-//    fun requestenterroom(
-//        @Field("roomname") roomname: String,
-//        @Field("password") password: String
-//    ):Call<DataRoomNumber>
+    @FormUrlEncoded
+    @POST("class/app_enter_room")
+    fun requestEnterRoom(
+        @Field("roomname") roomname: String,
+        @Field("password") password: String
+    ):Call<String>
 //
 //    @FormUrlEncoded
 //    @POST("main/app_enter_myroom")
@@ -164,14 +162,13 @@ interface RetrofitService {
 //        @Field("email") email: String
 //    ): Call<DataMypage>
 //
-//    @FormUrlEncoded
-//    @POST("main/app_check_myinfo")
-//    fun requestcheckmyinfo(
-//
-//        @Field("room") room: String,
-//        @Field("number") number: String,
-//        @Field("name") name: String
-//    ):Call<DataRoomNamePass>
+    @FormUrlEncoded
+    @POST("class/app_attendance")
+    fun requestAttendance(
+        @Field("room") room: String,
+        @Field("number") number: String,
+        @Field("name") name: String
+    ):Call<String>
 //
 //    @FormUrlEncoded
 //    @POST("/app_checkin")

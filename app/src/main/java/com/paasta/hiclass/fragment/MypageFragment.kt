@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.paasta.hiclass.*
 import com.paasta.hiclass.databinding.FragmentMypageBinding
+import com.paasta.hiclass.dialog.LogoutDialog
 import com.paasta.hiclass.model.ImageLoadTask
 import okhttp3.MediaType
 import okhttp3.MultipartBody

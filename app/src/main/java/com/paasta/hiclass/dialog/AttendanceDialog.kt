@@ -1,4 +1,4 @@
-package com.paasta.hiclass
+package com.paasta.hiclass.dialog
 
 import android.content.Context
 import android.content.Intent
@@ -14,9 +14,10 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import com.paasta.hiclass.RetrofitClient
+import com.paasta.hiclass.RoomCamera
 import com.paasta.hiclass.databinding.AttendanceDialogBinding
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 
 

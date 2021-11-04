@@ -1,8 +1,10 @@
 package com.paasta.hiclass
 
+import android.Manifest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.animation.Animator
+import android.annotation.TargetApi
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
@@ -11,6 +13,7 @@ import android.graphics.BitmapFactory
 import android.hardware.Camera
 import android.hardware.Camera.CameraInfo
 import android.hardware.Camera.PictureCallback
+import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
 import android.view.SurfaceHolder
@@ -19,6 +22,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.paasta.hiclass.databinding.ActivityLoginBinding
@@ -69,30 +73,6 @@ class RoomCamera : AppCompatActivity() {
         sh_viewFinder?.addCallback(surfaceListener)
         sh_viewFinder?.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS)
 
-        //카메라 권한의 승인 상태 가져오기
-        val cameraPermission = ContextCompat.checkSelfPermission(this,android.Manifest.permission.CAMERA)
-
-        if(cameraPermission != PackageManager.PERMISSION_GRANTED){
-            //승인되지 않았다면 권한 요청 프로세스 진행
-            requestPermission()
-        }
-        init();
-    }
-
-    private fun init() {
-
-
-        //인덱스, 룸이름
-//        index = intent.getStringExtra("index")
-//        roomname = intent.getStringExtra("roomname")
-
-        roomname=intent.getStringExtra("classname")
-        Log.d("수업이름", roomname.toString())
-        index="123"
-
-
-        addEventListener()
-
         binding.roomCountlottie.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationRepeat(animation: Animator?) {
 
@@ -119,6 +99,55 @@ class RoomCamera : AppCompatActivity() {
                 binding.btnNext?.setVisibility(View.GONE);
             }
         })
+
+//        //카메라 권한의 승인 상태 가져오기
+//        val cameraPermission = ContextCompat.checkSelfPermission(this,android.Manifest.permission.CAMERA)
+//
+//        if(cameraPermission != PackageManager.PERMISSION_GRANTED){
+//            //승인되지 않았다면 권한 요청 프로세스 진행
+//            binding.roomCountlottie.visibility = View.GONE
+//            binding.btnShutter?.setVisibility(View.GONE);
+//            binding.btnAgain?.setVisibility(View.GONE);
+//            binding.btnNext?.setVisibility(View.GONE);
+//            requestPermission()
+//        }else{
+//            init();
+//        }
+    }
+    override fun onStart() {
+        super.onStart()
+        //카메라 권한의 승인 상태 가져오기
+        val cameraPermission = ContextCompat.checkSelfPermission(this,android.Manifest.permission.CAMERA)
+
+        if(cameraPermission != PackageManager.PERMISSION_GRANTED){
+            //승인되지 않았다면 권한 요청 프로세스 진행
+            binding.roomCountlottie.visibility = View.GONE
+            binding.btnShutter?.setVisibility(View.GONE);
+            binding.btnAgain?.setVisibility(View.GONE);
+            binding.btnNext?.setVisibility(View.GONE);
+            binding.svViewFinder.setVisibility(View.INVISIBLE);
+            requestPermission()
+        }else{
+            init();
+        }
+
+    }
+
+    private fun init() {
+
+
+        //인덱스, 룸이름
+//        index = intent.getStringExtra("index")
+//        roomname = intent.getStringExtra("roomname")
+
+        roomname=intent.getStringExtra("classname")
+        Log.d("수업이름", roomname.toString())
+        index="123"
+
+
+        addEventListener()
+
+
     }
 
     private fun addEventListener() {
@@ -175,10 +204,37 @@ class RoomCamera : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 1000) {
             if (grantResults[0] != PackageManager.PERMISSION_GRANTED) { //거부
-                Toast.makeText(this@RoomCamera, "카메라 권한을 허용해주세요.", Toast.LENGTH_SHORT).show()
-                finish()
+               // Toast.makeText(this@RoomCamera, "카메라 권한을 허용해주세요.", Toast.LENGTH_SHORT).show()
+               // finish()
+                showDialogForPermission("앱을 실행하려면 권한을 허가하셔야합니다.")
+            }else {
+
+                binding.svViewFinder.setVisibility(View.VISIBLE);
+                binding.roomCountlottie.setVisibility(View.VISIBLE);
+
+                addEventListener()
             }
         }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private fun showDialogForPermission(msg: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("알림")
+        builder.setMessage(msg)
+        builder.setCancelable(false)
+        builder.setPositiveButton(
+            "예"
+        ) { dialog, id ->
+            requestPermission()
+        }
+        builder.setNegativeButton(
+            "아니오"
+        ) { arg0, arg1 ->
+            finish()
+            //  onBackPressed();
+        }
+        builder.create().show()
     }
 
     var surfaceListener: SurfaceHolder.Callback = object : SurfaceHolder.Callback {

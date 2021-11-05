@@ -182,12 +182,12 @@ interface RetrofitService {
 //        @Field("email") email: String
 //    ): Call<DataRoomNumber>
 //
-//    @FormUrlEncoded
-//    @POST("/app_sendcount")
-//    fun requestsendcount(
-//        @Field("email") email: String,
-//        @Field("count") count: Int,
-//        @Field("nonperson") nonperson: Int,
-//        @Field("roomname") roomname: String
-//    ): Call<DataRoomNumber>
+    @FormUrlEncoded
+    @POST("home/app_sendcount")
+    fun requestsendcount(
+        @Field("email") email: String,
+        @Field("count") count: Int,
+        @Field("nonperson") nonperson: Int,
+        @Field("roomname") roomname: String
+    ): Call<String>
 }

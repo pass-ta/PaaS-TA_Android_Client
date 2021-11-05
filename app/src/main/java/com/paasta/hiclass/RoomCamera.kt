@@ -338,9 +338,10 @@ class RoomCamera : AppCompatActivity() {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 val body = response.body()
                 Log.d("사진 본인확인",body.toString())
-//                val sucessintent = Intent(applicationContext, Face_recognition::class.java)
-//                sucessintent.putExtra("result", body?.image)
-//                startActivity(sucessintent)
+                val sucessintent = Intent(applicationContext, FaceRecognitionActivity::class.java)
+                sucessintent.putExtra("result", body)
+                sucessintent.putExtra("roomname", roomname)
+                startActivity(sucessintent)
             }
         })
     }

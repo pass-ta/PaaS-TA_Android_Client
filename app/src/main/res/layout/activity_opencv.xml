@@ -13,7 +13,7 @@
             android:layout_height="60dp"
             android:background="@color/orange"
             android:orientation="horizontal"
-            android:paddingHorizontal="15dp">
+            android:paddingHorizontal="10dp">
             <!--            <ImageView-->
             <!--                android:layout_width="40dp"-->
             <!--                android:layout_height="40dp"-->
@@ -28,12 +28,19 @@
                 android:layout_width="57dp"
                 android:layout_height="57dp"
                 android:layout_marginTop="3dp"
+                android:layout_marginLeft="28dp"
                 android:layout_gravity="center"
                 android:src="@drawable/logo_pencil" />
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
+            <ImageView
+                android:id="@+id/btn_exit"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/exit"/>
 
         </LinearLayout>
 

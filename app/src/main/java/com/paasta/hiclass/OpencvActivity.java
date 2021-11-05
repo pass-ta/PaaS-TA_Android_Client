@@ -126,13 +126,12 @@ public class OpencvActivity extends AppCompatActivity implements CameraBridgeVie
 
         setContentView(R.layout.activity_opencv);
 
-//        Intent intent = getIntent(); /*데이터 수신*/
-//
-//        String roomname = intent.getExtras().getString("roomname");
-//        Accessibility.count =0;
+        Intent intent = getIntent(); /*데이터 수신*/
 
+        String roomname = intent.getExtras().getString("roomname");
+        Accessibility.count =0;
 
-        //ImageView btn_endroom = (ImageView)findViewById(R.id.btn_endroom);
+        ImageView btn_exit = (ImageView)findViewById(R.id.btn_exit);
 
         mOpenCvCameraView = (CameraBridgeViewBase)findViewById(R.id.activity_surface_view);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
@@ -164,21 +163,21 @@ public class OpencvActivity extends AppCompatActivity implements CameraBridgeVie
         };
         timer.schedule(T,20000);     //20초후 실행
 
-//        btn_endroom.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//               // Intent intent = new Intent(getApplicationContext(), Endroom.class);
-//                if (nonperson>=0)
-//                    intent.putExtra("nonperson",Integer.toString(nonperson));
-//                intent.putExtra("roomname",roomname);
-//
-//                Log.d("nonperson", String.valueOf(nonperson));
-//                startActivity(intent);//액티비티 띄우기
-//                timer.cancel();
-//            }
-//
-//
-//        });
+        btn_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // Intent intent = new Intent(getApplicationContext(), Endroom.class);
+                if (nonperson>=0)
+                    intent.putExtra("nonperson",Integer.toString(nonperson));
+                intent.putExtra("roomname",roomname);
+
+                Log.d("nonperson", String.valueOf(nonperson));
+                startActivity(intent);//액티비티 띄우기
+                timer.cancel();
+            }
+
+
+        });
     }
     @Override
     public void onPause()

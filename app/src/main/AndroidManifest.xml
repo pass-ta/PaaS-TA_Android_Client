@@ -46,9 +46,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".EndRoomActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FaceRecognitionActivity"
+            android:exported="false" />
+        <activity
             android:name=".OpencvActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="landscape" />
+
         <service
             android:name=".Accessibility"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">

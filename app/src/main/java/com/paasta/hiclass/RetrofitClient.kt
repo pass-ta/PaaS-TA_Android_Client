@@ -30,7 +30,7 @@ object RetrofitClient {
     val retrofit = Retrofit.Builder()
         //url 은 ngrok 사용으로 계속 달라짐.
 //        .client(okHttpClient)
-        .baseUrl("https://fddf-1-242-40-90.ngrok.io")
+        .baseUrl("https://a54f-1-242-40-90.ngrok.io")
         .addConverterFactory(GsonConverterFactory.create(gson))
 //        .client(getUnsafeOkHttpClient().build())
         .build()
@@ -103,7 +103,7 @@ interface RetrofitService {
     ): Call<String>
 
     @Multipart
-    @POST("class/app_checkimg")
+    @POST("home/app_checkimg")
     fun requestCheckImage(
         @Part image: MultipartBody.Part
     ): Call<String>
@@ -144,7 +144,7 @@ interface RetrofitService {
 //        @Field("email") email: String
 //    ):Call<List<DataMyRoomInfo>>
     @FormUrlEncoded
-    @POST("class/app_enter_room")
+    @POST("home/app_enter_room")
     fun requestEnterRoom(
         @Field("roomname") roomname: String,
         @Field("password") password: String
@@ -163,7 +163,7 @@ interface RetrofitService {
 //    ): Call<DataMypage>
 //
     @FormUrlEncoded
-    @POST("class/app_attendance")
+    @POST("home/app_attendance")
     fun requestAttendance(
         @Field("room") room: String,
         @Field("number") number: String,
@@ -182,12 +182,12 @@ interface RetrofitService {
 //        @Field("email") email: String
 //    ): Call<DataRoomNumber>
 //
-//    @FormUrlEncoded
-//    @POST("/app_sendcount")
-//    fun requestsendcount(
-//        @Field("email") email: String,
-//        @Field("count") count: Int,
-//        @Field("nonperson") nonperson: Int,
-//        @Field("roomname") roomname: String
-//    ): Call<DataRoomNumber>
+    @FormUrlEncoded
+    @POST("home/app_sendcount")
+    fun requestsendcount(
+        @Field("email") email: String,
+        @Field("count") count: Int,
+        @Field("nonperson") nonperson: Int,
+        @Field("roomname") roomname: String
+    ): Call<String>
 }

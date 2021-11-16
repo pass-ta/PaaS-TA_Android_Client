@@ -22,6 +22,7 @@ class SettingCameraActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting_camera)
+        init()
 
     }
     private fun init(){
@@ -36,7 +37,6 @@ class SettingCameraActivity : AppCompatActivity() {
     private fun addEventListener() {
 
         binding.btnDone.setOnClickListener {
-
             val intent = Intent(applicationContext, OpencvActivity::class.java)
             intent.putExtra("roomname", roomname)
             intent.putExtra("email", dbemail)

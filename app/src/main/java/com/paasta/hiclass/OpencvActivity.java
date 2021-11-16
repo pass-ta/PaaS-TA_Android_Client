@@ -166,7 +166,7 @@ public class OpencvActivity extends AppCompatActivity implements CameraBridgeVie
         btn_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Intent intent = new Intent(getApplicationContext(), Endroom.class);
+                Intent intent = new Intent(getApplicationContext(), EndRoomActivity.class);
                 if (nonperson>=0)
                     intent.putExtra("nonperson",Integer.toString(nonperson));
                 intent.putExtra("roomname",roomname);

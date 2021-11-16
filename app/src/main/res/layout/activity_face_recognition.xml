@@ -43,9 +43,9 @@
         android:text="얼굴 인식 성공 ! "
         android:textColor="#ffffff"
         android:textStyle="bold"
-        android:textSize="20dp"
+        android:textSize="22dp"
         android:gravity="center"
-        android:layout_marginTop="35dp"/>
+        android:layout_marginTop="30dp"/>
 
     <ImageView
         android:layout_width="320dp"

@@ -23,6 +23,7 @@ class BlockAppActivity : AppCompatActivity() {
     private  var mBinding: ActivityBlockAppBinding?=null
     private  val binding get()=mBinding!!
 
+    private var roomname:String? = null
     private var dbemail: String? = null
     var result:Boolean=false
 
@@ -37,6 +38,8 @@ class BlockAppActivity : AppCompatActivity() {
         mBinding = ActivityBlockAppBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        roomname = intent.getStringExtra("roomname")
+
         checkAccessibility()
         addEventListener()
     }
@@ -47,7 +50,7 @@ class BlockAppActivity : AppCompatActivity() {
 
                 //check(dbemail.toString())
                 val intent = Intent(applicationContext, SettingCameraActivity::class.java)
-                //intent.putExtra("roomname", roomname)
+                intent.putExtra("roomname", roomname)
                 startActivity(intent)
 
             }
@@ -124,41 +127,4 @@ class BlockAppActivity : AppCompatActivity() {
 
     }
 
-    fun check(email: String) {
-//        RetrofitClient.signupservice.requestcheckin(email)
-//            .enqueue(object :
-//                retrofit2.Callback<DataRoomNumber> {
-//                override fun onFailure(call: Call<DataRoomNumber>, t: Throwable) {
-//                    Toast.makeText(
-//                        applicationContext,
-//                        "전송 실패" + t.message,
-//                        Toast.LENGTH_LONG
-//                    ).show()
-//                }
-//
-//                override fun onResponse(
-//                    call: Call<DataRoomNumber>,
-//                    response: Response<DataRoomNumber>
-//                ) {
-//
-//                    val body = response.body()
-//                    Log.d("앱 인증 완료", body?.roomname)
-//
-//                    if (body != null) {
-//                        Toast.makeText(
-//                            applicationContext,
-//                            "방 입장",
-//                            Toast.LENGTH_LONG
-//                        ).show()
-//                    } else {
-//                        Toast.makeText(
-//                            applicationContext,
-//                            "방 입장 실패",
-//                            Toast.LENGTH_LONG
-//                        ).show()
-//                    }
-//
-//                }
-//            })
-    }
 }

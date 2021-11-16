@@ -27,23 +27,23 @@ class FaceRecognitionActivity : AppCompatActivity() {
         val result = intent.getStringExtra("result")
         val roomname = intent.getStringExtra("roomname")
         Log.d("얼굴인식", result.toString())
-//
-//        if(result=="no"){
-//            binding.imgResult.setImageResource(R.drawable.fail)
-//            binding.txtResult1.setText("얼굴 인식 실패 !")
-//            binding.txtResult2.setText("다시 시도해 주세요")
-//            binding.txtResult3.setVisibility(View.INVISIBLE);
-//            binding.btnNext.setText("Again")
-//            binding.btnNext.setOnClickListener {
-//                finish()
-//            }
-//        }else{
-//            binding.btnNext.setOnClickListener {
-                    val intent = Intent(applicationContext, SettingCameraActivity::class.java)
+
+        if(result=="fail"){
+            binding.imgResult.setImageResource(R.drawable.school)
+            binding.txtResult1.setText("얼굴 인식 실패 !")
+            binding.txtResult2.setText("다시 시도해 주세요")
+            binding.txtResult3.setVisibility(View.INVISIBLE);
+            binding.btnNext.setText("Again")
+            binding.btnNext.setOnClickListener {
+                finish()
+            }
+        }else if(result=="success"){
+            binding.btnNext.setOnClickListener {
+                    val intent = Intent(applicationContext, BlockAppActivity::class.java)
                     intent.putExtra("roomname", roomname)
                     startActivity(intent)
-//            }
-//        }
+            }
+        }
     }
 
     //back 키 누르면 홈으로

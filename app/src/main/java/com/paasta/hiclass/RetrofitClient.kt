@@ -21,18 +21,18 @@ object RetrofitClient {
         .setLenient()
         .create()
 
-//    var okHttpClient = OkHttpClient().newBuilder()
-//        .connectTimeout(40, TimeUnit.SECONDS)
-//        .readTimeout(60, TimeUnit.SECONDS)
-//        .writeTimeout(60, TimeUnit.SECONDS)
-//        .build()
+    var okHttpClient = OkHttpClient.Builder()
+        .connectTimeout(1, TimeUnit.MINUTES)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(15, TimeUnit.SECONDS)
+        .build()
 
     val retrofit = Retrofit.Builder()
         //url 은 ngrok 사용으로 계속 달라짐.
 //        .client(okHttpClient)
-        .baseUrl("https://a54f-1-242-40-90.ngrok.io")
+        .baseUrl("https://b9f0-1-242-40-90.ngrok.io")
         .addConverterFactory(GsonConverterFactory.create(gson))
-//        .client(getUnsafeOkHttpClient().build())
+        .client(okHttpClient)
         .build()
 
 //    fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
@@ -169,13 +169,7 @@ interface RetrofitService {
         @Field("number") number: String,
         @Field("name") name: String
     ):Call<String>
-//
-//    @FormUrlEncoded
-//    @POST("/app_checkin")
-//    fun requestcheckin(
-//        @Field("email") email: String
-//    ): Call<DataRoomNumber>
-//
+
 //    @FormUrlEncoded
 //    @POST("/app_checkout")
 //    fun requestcheckout(

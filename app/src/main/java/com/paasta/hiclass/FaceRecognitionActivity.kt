@@ -37,7 +37,7 @@ class FaceRecognitionActivity : AppCompatActivity() {
             binding.btnNext.setOnClickListener {
                 finish()
             }
-        }else{
+        }else if(result=="success"){
             binding.btnNext.setOnClickListener {
                     val intent = Intent(applicationContext, BlockAppActivity::class.java)
                     intent.putExtra("roomname", roomname)

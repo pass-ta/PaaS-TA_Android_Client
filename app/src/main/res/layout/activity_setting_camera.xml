@@ -53,9 +53,10 @@
             android:layout_height="wrap_content"
             android:text="자리 이탈 확인을 위한 카메라가 실행됩니다."
             android:textSize="20dp"
-            android:textColor="@color/white"
+            android:textColor="@color/green"
+            android:textStyle="bold"
             android:gravity="center"
-            android:layout_marginTop="30dp"/>
+            android:layout_marginTop="25dp"/>
         <ImageView
             android:layout_marginTop="30dp"
             android:layout_width="350dp"
@@ -74,23 +75,23 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:text="위의 사진을 참고하여 핸드폰을 본인을 향해 "
-                android:textSize="14dp"
-                android:layout_marginTop="20dp"/>
+                android:textSize="15dp"
+                android:layout_marginTop="25dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="가로"
                 android:textStyle="bold"
                 android:textColor="#234CC8"
-                android:textSize="14dp"
-                android:layout_marginTop="20dp"/>
+                android:textSize="15dp"
+                android:layout_marginTop="25dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="로 배치해 주세요."
                 android:textColor="@color/white"
-                android:textSize="14dp"
-                android:layout_marginTop="20dp"/>
+                android:textSize="15dp"
+                android:layout_marginTop="25dp"/>
 
 
 

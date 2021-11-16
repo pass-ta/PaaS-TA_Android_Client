@@ -49,7 +49,7 @@ class RoomCamera : AppCompatActivity() {
     var sh_viewFinder: SurfaceHolder? = null
     var camera: Camera? = null
     var myfile: File? = null
-//    var btn_shutter: Button? = null
+    //    var btn_shutter: Button? = null
 //    var btn_again: Button? = null
 //    var room_sendlottie: Button? = null
 //    var iv_preview: ImageView? = null
@@ -144,12 +144,23 @@ class RoomCamera : AppCompatActivity() {
 
 
     }
+    override fun onBackPressed() {
+        startActivity(Intent(this, MainActivity::class.java))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.btnShutter?.setVisibility(View.VISIBLE);
+        binding.btnAgain?.setVisibility(View.GONE);
+
+
+    }
 
     private fun addEventListener() {
         binding.btnShutter.setOnClickListener{
             binding.btnShutter?.setVisibility(View.GONE);
             binding.btnAgain?.setVisibility(View.VISIBLE);
-               // room_sendlottie?.setVisibility(View.VISIBLE);
+            // room_sendlottie?.setVisibility(View.VISIBLE);
             startTakePicture()
         }
         binding.btnAgain.setOnClickListener {
@@ -160,7 +171,7 @@ class RoomCamera : AppCompatActivity() {
         }
         binding.btnNext.setOnClickListener {
             if (myfile != null) {
- //               room_secondrocket_lottie.visibility = View.VISIBLE
+                //               room_secondrocket_lottie.visibility = View.VISIBLE
                 Toast.makeText(
                     applicationContext,
                     "본인 확인 중 입니다.",
@@ -184,8 +195,8 @@ class RoomCamera : AppCompatActivity() {
 
     private fun requestPermission() {
         ActivityCompat.requestPermissions(
-                this, arrayOf(android.Manifest.permission.CAMERA),
-                1000
+            this, arrayOf(android.Manifest.permission.CAMERA),
+            1000
         )
 
     }
@@ -199,8 +210,8 @@ class RoomCamera : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 1000) {
             if (grantResults[0] != PackageManager.PERMISSION_GRANTED) { //거부
-               // Toast.makeText(this@RoomCamera, "카메라 권한을 허용해주세요.", Toast.LENGTH_SHORT).show()
-               // finish()
+                // Toast.makeText(this@RoomCamera, "카메라 권한을 허용해주세요.", Toast.LENGTH_SHORT).show()
+                // finish()
                 showDialogForPermission("앱을 실행하려면 권한을 허가하셔야합니다.")
             }else {
 
@@ -349,4 +360,3 @@ class RoomCamera : AppCompatActivity() {
         })
     }
 }
-

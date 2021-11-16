@@ -29,7 +29,7 @@ class FaceRecognitionActivity : AppCompatActivity() {
         Log.d("얼굴인식", result.toString())
 
         if(result=="fail"){
-            binding.imgResult.setImageResource(R.drawable.school)
+            binding.imgResult.setImageResource(R.drawable.fail)
             binding.txtResult1.setText("얼굴 인식 실패 !")
             binding.txtResult2.setText("다시 시도해 주세요")
             binding.txtResult3.setVisibility(View.INVISIBLE);

@@ -30,7 +30,7 @@ object RetrofitClient {
     val retrofit = Retrofit.Builder()
         //url 은 ngrok 사용으로 계속 달라짐.
 //        .client(okHttpClient)
-        .baseUrl("https://a54f-1-242-40-90.ngrok.io")
+        .baseUrl("https://3c6a-1-242-40-90.ngrok.io")
         .addConverterFactory(GsonConverterFactory.create(gson))
 //        .client(getUnsafeOkHttpClient().build())
         .build()
@@ -169,13 +169,7 @@ interface RetrofitService {
         @Field("number") number: String,
         @Field("name") name: String
     ):Call<String>
-//
-//    @FormUrlEncoded
-//    @POST("/app_checkin")
-//    fun requestcheckin(
-//        @Field("email") email: String
-//    ): Call<DataRoomNumber>
-//
+
 //    @FormUrlEncoded
 //    @POST("/app_checkout")
 //    fun requestcheckout(

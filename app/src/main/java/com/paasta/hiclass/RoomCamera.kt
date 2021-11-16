@@ -137,13 +137,8 @@ class RoomCamera : AppCompatActivity() {
 
 
         //인덱스, 룸이름
-//        index = intent.getStringExtra("index")
-//        roomname = intent.getStringExtra("roomname")
-
-        roomname=intent.getStringExtra("classname")
-        Log.d("수업이름", roomname.toString())
-        index="123"
-
+        index = intent.getStringExtra("index")
+        roomname = intent.getStringExtra("classname")
 
         addEventListener()
 
@@ -338,10 +333,18 @@ class RoomCamera : AppCompatActivity() {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 val body = response.body()
                 Log.d("사진 본인확인",body.toString())
-                val sucessintent = Intent(applicationContext, FaceRecognitionActivity::class.java)
-                sucessintent.putExtra("result", body)
-                sucessintent.putExtra("roomname", roomname)
-                startActivity(sucessintent)
+
+
+                if (body != null) {
+                    //학번 이름 일치
+                    val sucessintent = Intent(applicationContext, FaceRecognitionActivity::class.java)
+                    sucessintent.putExtra("result", body)
+                    sucessintent.putExtra("roomname", roomname)
+                    startActivity(sucessintent)
+
+                }else {
+                    Toast.makeText(applicationContext, "실패"+response.body(), Toast.LENGTH_LONG).show()
+                }
             }
         })
     }

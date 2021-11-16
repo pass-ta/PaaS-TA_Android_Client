@@ -34,7 +34,7 @@ class EndRoomActivity : AppCompatActivity() {
         nonperson= person!!.toInt()
         Log.d("자리이탈횟수", nonperson.toString())
         val roomname = intent.getStringExtra("roomname")
-
+        dbemail = LoginActivity.prefs.getString("email","")
         if (roomname != null) {
             sendCount(dbemail.toString(),realcount,nonperson,roomname)
         }

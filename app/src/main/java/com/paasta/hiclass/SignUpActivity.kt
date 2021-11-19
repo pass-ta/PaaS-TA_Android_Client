@@ -46,15 +46,6 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.btnSignup.setOnClickListener {
 
-
-//            email=binding.editEmail?.text.toString()
-//            password=binding.editPassword?.text.toString()
-//            name=binding.editName?.text.toString()
-//            Log.d("signup123",role)
-//            Log.d("signup123",email)
-//            Log.d("signup123",name)
-//            Log.d("signup123",password)
-//            signUp(email,password,name,role)
             if (binding.editEmail.text.toString() != null && binding.editPassword.text.toString() != null && binding.editName.text.toString() != null) {
                 //서버로 데이터를 보내줌
                 signUp(

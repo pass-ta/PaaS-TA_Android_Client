@@ -69,8 +69,6 @@ class AttendanceDialog: DialogFragment() {
     private fun addEventListener() {
         binding.btnEnter.setOnClickListener{
            checkinfo(binding.editName?.text.toString(),binding.editNumber?.text.toString())
-            Log.d("신원",binding.editName?.text.toString())
-            Log.d("신원",binding.editNumber?.text.toString())
         }
     }
     override fun onDestroyView() {
@@ -90,18 +88,19 @@ class AttendanceDialog: DialogFragment() {
 
                     if (body != null) {
                         //학번 이름 일치
-                        if(body=="success") {
-                            Toast.makeText(context, "얼굴 인식 페이지로 이동합니다.", Toast.LENGTH_LONG).show()
-                            val sucessintent = Intent(getActivity()?.getApplicationContext(), RoomCamera::class.java)
-                            //sucessintent.putExtra("index", )
-                            sucessintent.putExtra("classname", className)
-                            startActivity(sucessintent)
-                        }else if(body=="fail"){
+
+                        if(body=="nomatch"){
                             //학번 이름 불일치
                             Toast.makeText(context, "학번과 이름이 일치하지 않습니다.", Toast.LENGTH_LONG).show()
-                        }else if(body=="no") {
+                        }else if(body=="nonum") {
                             //명단에 없음
                             Toast.makeText(context, "명단에 존재하지 않습니다.", Toast.LENGTH_LONG).show()
+                        }else{
+                            Toast.makeText(context, "얼굴 인식 페이지로 이동합니다.", Toast.LENGTH_LONG).show()
+                            val sucessintent = Intent(getActivity()?.getApplicationContext(), RoomCamera::class.java)
+                            sucessintent.putExtra("index", body)
+                            sucessintent.putExtra("classname", className)
+                            startActivity(sucessintent)
                         }
                     }else {
                         Toast.makeText(context, "실패"+response.body(), Toast.LENGTH_LONG).show()

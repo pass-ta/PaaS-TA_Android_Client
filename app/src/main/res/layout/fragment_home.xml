@@ -127,6 +127,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="4"
+                            android:gravity="center"
                             android:background="@drawable/edittext_layout2"
                             android:paddingHorizontal="20dp" />
                     </LinearLayout>
@@ -150,6 +151,7 @@
                         <EditText
                             android:id="@+id/edit_class_password"
                             android:layout_width="0dp"
+                            android:gravity="center"
                             android:layout_height="match_parent"
                             android:layout_weight="4"
                             android:background="@drawable/edittext_layout2"

@@ -169,7 +169,7 @@ public class OpencvActivity extends AppCompatActivity implements CameraBridgeVie
                 Intent intent = new Intent(getApplicationContext(), EndRoomActivity.class);
                 if (nonperson>=0)
                     intent.putExtra("nonperson",Integer.toString(nonperson));
-                intent.putExtra("roomname",roomname);
+                    intent.putExtra("roomname",roomname);
 
                 Log.d("nonperson", String.valueOf(nonperson));
                 startActivity(intent);//액티비티 띄우기

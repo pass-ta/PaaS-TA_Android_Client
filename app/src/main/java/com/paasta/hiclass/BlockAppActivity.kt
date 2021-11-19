@@ -37,7 +37,7 @@ class BlockAppActivity : AppCompatActivity() {
     private fun init(){
         mBinding = ActivityBlockAppBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        dbemail = LoginActivity.prefs.getString("email","")
         roomname = intent.getStringExtra("roomname")
 
         checkAccessibility()
@@ -47,9 +47,9 @@ class BlockAppActivity : AppCompatActivity() {
     private fun addEventListener() {
         binding.btnNext.setOnClickListener {
             if(result==true) {
-
-                //check(dbemail.toString())
+                check(dbemail.toString())
                 val intent = Intent(applicationContext, SettingCameraActivity::class.java)
+                intent.putExtra("check", dbemail)
                 intent.putExtra("roomname", roomname)
                 startActivity(intent)
 
@@ -125,6 +125,43 @@ class BlockAppActivity : AppCompatActivity() {
                 return@OnClickListener
             }).create().show()
 
+    }
+    fun check(email: String) {
+        RetrofitClient.retrofitservice.requestcheckin(email)
+            .enqueue(object :
+                retrofit2.Callback<String> {
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Toast.makeText(
+                        applicationContext,
+                        "전송 실패" + t.message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+                override fun onResponse(
+                    call: Call<String>,
+                    response: Response<String>
+                ) {
+
+                    val body = response.body()
+                    Log.d("앱 인증 완료", body.toString())
+
+                    if (body == "yes") {
+                        Toast.makeText(
+                            applicationContext,
+                            "앱 인증이 완료되었습니다.",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            applicationContext,
+                            "방 입장 실패",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+
+                }
+            })
     }
 
 }

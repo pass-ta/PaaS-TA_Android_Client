@@ -54,7 +54,9 @@
         <activity
             android:name=".OpencvActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape" >
+
+        </activity>
 
         <service
             android:name=".Accessibility"

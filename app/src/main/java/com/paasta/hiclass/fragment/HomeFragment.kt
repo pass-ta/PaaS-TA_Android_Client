@@ -24,7 +24,6 @@ class HomeFragment : Fragment() {
     private lateinit var enterClass: Button
     private lateinit var className: EditText
     private lateinit var classPassword: EditText
-//    private lateinit var manageQuiz: ImageView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -38,7 +37,6 @@ class HomeFragment : Fragment() {
         enterClass = view.findViewById(R.id.btn_enter)
         className= view.findViewById<EditText>(R.id.edit_class_name)
         classPassword= view.findViewById<EditText>(R.id.edit_class_password)
-//        manageQuiz = view.findViewById(R.id.btn_manage_quiz)
 
 //        name = LoginActivity.prefs.getString("name","")
 //        email = LoginActivity.prefs.getString("email","")
@@ -60,8 +58,7 @@ class HomeFragment : Fragment() {
                 }
             }else
                 Toast.makeText(getActivity(), "방 이름을 입력해주세요", Toast.LENGTH_LONG).show()
-//            val intent = Intent(getActivity(), RoomCamera::class.java)
-//            startActivity(intent)
+
         }
     }
 

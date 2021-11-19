@@ -30,42 +30,10 @@ object RetrofitClient {
     val retrofit = Retrofit.Builder()
         //url 은 ngrok 사용으로 계속 달라짐.
 //        .client(okHttpClient)
-        .baseUrl("https://b9f0-1-242-40-90.ngrok.io")
+        .baseUrl("https://9f97-121-133-78-175.ngrok.io")
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(okHttpClient)
         .build()
-
-//    fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
-//        val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
-//            override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-//
-//            }
-//
-//            override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-//
-//            }
-//
-//            override fun getAcceptedIssuers(): Array<X509Certificate> {
-//                return arrayOf()
-//            }
-//        })
-//
-//        val sslContext = SSLContext.getInstance("SSL")
-//        sslContext.init(null, trustAllCerts, SecureRandom())
-//
-//        val sslSocketFactory = sslContext.socketFactory
-//
-//        val builder = OkHttpClient.Builder()
-//        builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
-//        builder.hostnameVerifier { hostname, session -> true }
-//            .connectTimeout(40, TimeUnit.SECONDS)
-//            .readTimeout(60, TimeUnit.SECONDS)
-//            .writeTimeout(60, TimeUnit.SECONDS)
-//            .build()
-//
-//
-//        return builder
-//    }
 
     val retrofitservice: RetrofitService = retrofit.create(RetrofitService::class.java)
 }

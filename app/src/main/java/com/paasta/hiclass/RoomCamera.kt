@@ -49,10 +49,6 @@ class RoomCamera : AppCompatActivity() {
     var sh_viewFinder: SurfaceHolder? = null
     var camera: Camera? = null
     var myfile: File? = null
-    //    var btn_shutter: Button? = null
-//    var btn_again: Button? = null
-//    var room_sendlottie: Button? = null
-//    var iv_preview: ImageView? = null
     var fos: FileOutputStream? = null
     private var dbemail: String? = null
     private lateinit var body: MultipartBody.Part
@@ -86,7 +82,6 @@ class RoomCamera : AppCompatActivity() {
                 binding.btnAgain?.setVisibility(View.VISIBLE);
                 binding.btnNext?.setVisibility(View.VISIBLE);
 
-
             }
 
             override fun onAnimationCancel(animation: Animator?) {
@@ -100,19 +95,6 @@ class RoomCamera : AppCompatActivity() {
             }
         })
 
-//        //카메라 권한의 승인 상태 가져오기
-//        val cameraPermission = ContextCompat.checkSelfPermission(this,android.Manifest.permission.CAMERA)
-//
-//        if(cameraPermission != PackageManager.PERMISSION_GRANTED){
-//            //승인되지 않았다면 권한 요청 프로세스 진행
-//            binding.roomCountlottie.visibility = View.GONE
-//            binding.btnShutter?.setVisibility(View.GONE);
-//            binding.btnAgain?.setVisibility(View.GONE);
-//            binding.btnNext?.setVisibility(View.GONE);
-//            requestPermission()
-//        }else{
-//            init();
-//        }
     }
     override fun onStart() {
         super.onStart()
@@ -142,7 +124,6 @@ class RoomCamera : AppCompatActivity() {
 
         addEventListener()
 
-
     }
     override fun onBackPressed() {
         startActivity(Intent(this, MainActivity::class.java))
@@ -152,7 +133,6 @@ class RoomCamera : AppCompatActivity() {
         super.onResume()
         binding.btnShutter?.setVisibility(View.VISIBLE);
         binding.btnAgain?.setVisibility(View.GONE);
-
 
     }
 

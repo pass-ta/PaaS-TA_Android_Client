@@ -18,7 +18,6 @@ class LoginActivity : AppCompatActivity() {
 
     private  var mBinding:ActivityLoginBinding?=null
     private  val binding get()=mBinding!!
-    private var role:String="teacher"
 
 
     companion object { lateinit var prefs: PreferenceUtil }
@@ -40,13 +39,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun addEventListener() {
 
-        binding.radiobtnLogin.setOnCheckedChangeListener { radioGroup, i ->
-            when(i){
-                R.id.radiobtn_teacher -> role="teacher"
-                R.id.radiobtn_student -> role="student"
-            }
-        }
-
         binding.btnLogin.setOnClickListener {
 
             login()
@@ -60,12 +52,10 @@ class LoginActivity : AppCompatActivity() {
     private fun login() {
 
         if (binding.editEmail?.text.toString()!="" && binding.editEmail?.text.toString()!="") {
-////            val progressDialog: ProgressDialog = ProgressDialog(this)
-////            progressDialog.setTitle("로그인중...")
-////            progressDialog.show()
+
             RetrofitClient.retrofitservice.requestLogin(
                 binding.editEmail.text.toString(),
-                binding.editPassword.text.toString(),role
+                binding.editPassword.text.toString()
             ).enqueue(object : Callback<UserData> {
                 override fun onFailure(call: Call<UserData>, t: Throwable) {
                     Toast.makeText(applicationContext,"통신 실패",Toast.LENGTH_SHORT).show()
@@ -78,11 +68,10 @@ class LoginActivity : AppCompatActivity() {
                     if(response.body()?.name!="Fail") {
                         if(response.body()?.name=="no"){
                             Toast.makeText(applicationContext, "해당 이메일은 가입되어 있지 않습니다.", Toast.LENGTH_SHORT).show()
-////                            progressDialog.cancel()
+
                         }else {
                             prefs.setString("email",binding.editEmail.text.toString())
                             prefs.setString("password",binding.editPassword.text.toString())
-                            prefs.setString("role",role)
                             prefs.setString("name", body?.name.toString())
 
                             Toast.makeText(applicationContext, "홈 화면으로 이동합니다", Toast.LENGTH_LONG)

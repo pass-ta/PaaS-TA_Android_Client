@@ -30,7 +30,7 @@ object RetrofitClient {
     val retrofit = Retrofit.Builder()
         //url 은 ngrok 사용으로 계속 달라짐.
 //        .client(okHttpClient)
-        .baseUrl("https://9f97-121-133-78-175.ngrok.io")
+        .baseUrl("https://hmys-hiclass.paas-ta.org")
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(okHttpClient)
         .build()
@@ -41,15 +41,11 @@ object RetrofitClient {
 //서버로 보내는 INPUT데이터
 interface RetrofitService {
     //베이스 URL 을 제외한 경로
-
-
-    //    @Headers("Content-Type: application/json")
     @FormUrlEncoded
     @POST("/app_login")
     fun requestLogin(
         @Field("email") email: String,
         @Field("password") password: String,
-        @Field("role") role: String,
     ): Call<UserData>
     @FormUrlEncoded
     @POST("/app_signup")
@@ -75,61 +71,20 @@ interface RetrofitService {
     fun requestCheckImage(
         @Part image: MultipartBody.Part
     ): Call<String>
-    //@Headers("Content-Type: application/json")
-//    @FormUrlEncoded
-//    @POST("/app_delete")
-//    fun requestDelete(
-//        @Field("email") email: String
-//    ):Call<Int>
-//    @FormUrlEncoded
-//    @POST("/app_modify")
-//    fun requestModify(
-//        @Field("email") email: String,
-//        @Field("name") name: String
-//    ):Call<DataSignUp>
-//
-//    @Multipart
-//    @POST("main/app_makeroom")
-//    fun requestMakeRoom(
-//        @Part("name") name: RequestBody,
-//        @Part("pass") pass: RequestBody,
-//        @Part("admin") admin: RequestBody,
-//        @Part("checkbox") checkbox: RequestBody,
-//        @Part files: MultipartBody.Part
-//    ): Call<DataMakeRoom>
-//    @FormUrlEncoded
-//    @POST("main/app_makemyroom")
-//    fun requestRoomNumberPass(
-//        @Field("roomname") roomname: String,
-//        @Field("password") password: String,
-//        @Field("admin") admin: String,
-//        @Field("checkbox") checkbox: String
-//    ):Call<DataRoomNamePass>
-//
-//    @FormUrlEncoded
-//    @POST("main/app_myroom")
-//    fun requestmyroom(
-//        @Field("email") email: String
-//    ):Call<List<DataMyRoomInfo>>
+
     @FormUrlEncoded
     @POST("home/app_enter_room")
     fun requestEnterRoom(
         @Field("roomname") roomname: String,
         @Field("password") password: String
     ):Call<String>
-//
-//    @FormUrlEncoded
-//    @POST("main/app_enter_myroom")
-//    fun requestentermyroom(
-//        @Field("roomname") roomname: String
-//    ):Call<DataRoomNumber>
-//
-//    @FormUrlEncoded
-//    @POST("/app_mypage")
-//    fun requestMypage(
-//        @Field("email") email: String
-//    ): Call<DataMypage>
-//
+
+    @FormUrlEncoded
+    @POST("home/app_checkin")
+    fun requestcheckin(
+        @Field("email") email: String
+    ): Call<String>
+
     @FormUrlEncoded
     @POST("home/app_attendance")
     fun requestAttendance(
@@ -138,12 +93,6 @@ interface RetrofitService {
         @Field("name") name: String
     ):Call<String>
 
-//    @FormUrlEncoded
-//    @POST("/app_checkout")
-//    fun requestcheckout(
-//        @Field("email") email: String
-//    ): Call<DataRoomNumber>
-//
     @FormUrlEncoded
     @POST("home/app_sendcount")
     fun requestsendcount(

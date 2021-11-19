@@ -15,39 +15,16 @@
 
         <ImageView
             android:layout_width="296dp"
+            android:layout_marginTop="10dp"
             android:layout_height="154dp"
             android:layout_gravity="center"
             android:src="@drawable/logo" />
-
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:id="@+id/radiobtn_login">
-            <RadioButton
-                android:id="@+id/radiobtn_teacher"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:buttonTint="@color/orange"
-                android:text="교사"/>
-            <RadioButton
-                android:id="@+id/radiobtn_student"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:buttonTint="@color/orange"
-                android:layout_weight="1"
-                android:text="학생"/>
-        </RadioGroup>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/edittext_layout1"
             android:paddingHorizontal="12dp">
 
@@ -97,7 +74,7 @@
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="23dp"
+            android:layout_marginTop="30dp"
             android:text="로그인"
             android:textStyle="bold"
             android:textSize="15dp"
